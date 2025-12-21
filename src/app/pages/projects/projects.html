@@ -1,0 +1,15 @@
+<section class="max-w-7xl mx-auto px-6 py-20">
+  <div class="mb-16">
+    <app-section-title title="Proyectos Destacados"></app-section-title>
+    <p class="text-zinc-500 mt-6 max-w-2xl text-lg text-balance leading-relaxed">
+      Una selección de proyectos que demuestran mi experiencia en desarrollo full-stack,
+      arquitectura de software y resolución de problemas complejos.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+    @for (project of projectsService.projects(); track project.title) {
+    <app-project-card [project]="project"></app-project-card>
+    }
+  </div>
+</section>

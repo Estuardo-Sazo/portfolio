@@ -1,0 +1,10 @@
+{
+  "framework": null,
+  "outputDirectory": "dist/jaszcode-web",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}

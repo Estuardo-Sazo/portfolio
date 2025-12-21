@@ -1,0 +1,151 @@
+<!-- Hero Section -->
+<section class="min-h-[70vh] flex flex-col justify-center px-6 max-w-6xl mx-auto">
+  <div class="max-w-4xl animate-fade-in-up">
+    <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 leading-[1.1] mb-6">
+      Transformando ideas en <br />
+      <span class="text-blue-600">soluciones digitales.</span>
+    </h1>
+
+    <p class="text-xl text-gray-500 max-w-2xl leading-relaxed mb-8">
+      Ingeniero de Sistemas y desarrollador web especializado en construir aplicaciones web
+      escalables y de alto rendimiento. Enfoque en arquitectura limpia y experiencia de usuario.
+    </p>
+
+    <div class="flex gap-4">
+      <a
+        routerLink="/projects"
+        class="px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors shadow-sm hover:shadow-md"
+      >
+        Ver trabajo
+      </a>
+      <a
+        routerLink="/contact"
+        class="px-6 py-3 bg-white text-gray-700 border border-gray-200 font-medium rounded-lg hover:bg-gray-50 transition-colors"
+      >
+        Contactar
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- About Me Section -->
+<section class="py-20 px-6 max-w-6xl mx-auto border-t border-gray-100 mb-10">
+  <div class="grid md:grid-cols-2 gap-12 items-center">
+    <!-- Image Column -->
+    <div class="relative order-2 md:order-1">
+      <div
+        class="aspect-square max-w-md mx-auto relative rounded-3xl overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-all duration-500"
+      >
+        <!-- Placeholder for profile image -->
+        <img src="icons/me.png" alt="Jaime Sazo" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent"></div>
+      </div>
+      <!-- Decorative Element -->
+      <div
+        class="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-100 rounded-full -z-10 blur-xl"
+      ></div>
+      <div
+        class="absolute -top-6 -right-6 w-32 h-32 bg-indigo-100 rounded-full -z-10 blur-xl"
+      ></div>
+    </div>
+
+    <!-- Content Column -->
+    <div class="order-1 md:order-2">
+      <app-section-title title="Sobre Mí"></app-section-title>
+
+      <div class="mt-8 space-y-6 text-gray-600 text-lg leading-relaxed">
+        <p>
+          <strong class="text-blue-600">Programador con 6 años de experiencia</strong> en el
+          desarrollo de sistemas WEB y Back End. Me especializo en tecnologías modernas y frameworks
+          líderes como
+          <span class="text-gray-900 font-medium bg-gray-100 px-1 rounded">Node.js</span>,
+          <span class="text-gray-900 font-medium bg-gray-100 px-1 rounded">Angular</span>,
+          <span class="text-gray-900 font-medium bg-gray-100 px-1 rounded">Spring</span>,
+          <span class="text-gray-900 font-medium bg-gray-100 px-1 rounded">Laravel</span>,
+          <span class="text-gray-900 font-medium bg-gray-100 px-1 rounded">Odoo</span>,
+          <span class="text-gray-900 font-medium bg-gray-100 px-1 rounded">MongoDB</span> y
+          <span class="text-gray-900 font-medium bg-gray-100 px-1 rounded">Java</span>.
+        </p>
+        <p>
+          Trabajo actualmente como
+          <strong>implementador y desarrollador de Odoo ERP</strong> (versiones 14 a 18), creando
+          soluciones personalizadas y gestionando integraciones críticas como la
+          <strong>facturación electrónica</strong> en Guatemala, El Salvador y Costa Rica.
+        </p>
+        <p>
+          Mi enfoque es adquirir conocimientos fundamentales para la ejecución exitosa de proyectos,
+          manteniéndome siempre actualizado con las nuevas tecnologías.
+        </p>
+      </div>
+
+      <!-- Social Links -->
+      <div class="flex gap-4 mt-8">
+        <a
+          href="https://github.com/Estuardo-Sazo"
+          target="_blank"
+          class="p-3 bg-gray-50 text-gray-700 rounded-full hover:bg-gray-900 hover:text-white transition-all duration-300"
+          aria-label="GitHub"
+        >
+          <img src="icons/git.svg" alt="GitHub" class="w-6 h-6" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/jaime-estuardo-sazo-cort%C3%A9z-675947206/"
+          target="_blank"
+          class="p-3 bg-gray-50 text-gray-700 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300"
+          aria-label="LinkedIn"
+        >
+          <img src="icons/linkedin.png" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+        <a
+          href="mailto:iaimeestuardosazo@gmail.com"
+          class="p-3 bg-gray-50 text-gray-700 rounded-full hover:bg-red-500 hover:text-white transition-all duration-300"
+          aria-label="Email"
+        >
+          <img src="icons/mail.svg" alt="Email" class="w-6 h-6" />
+        </a>
+        <a
+          href="https://www.youtube.com/@JaszCode"
+          target="_blank"
+          class="p-3 bg-gray-50 text-gray-700 rounded-full hover:bg-red-500 hover:text-white transition-all duration-300"
+          aria-label="YouTube"
+        >
+          <img src="icons/youtube.svg" alt="YouTube" class="w-6 h-6" />
+        </a>
+        <a
+          href="https://www.facebook.com/jaimesazodev"
+          target="_blank"
+          class="p-3 bg-gray-50 text-gray-700 rounded-full hover:bg-red-500 hover:text-white transition-all duration-300"
+          aria-label="Facebook"
+        >
+          <img src="icons/facebook.png" alt="Facebook" class="w-6 h-6" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Technologies Bento Grid -->
+<section class="py-20 px-6 max-w-6xl mx-auto border-t border-gray-100">
+  <app-section-title title="Stack Tecnológico"></app-section-title>
+
+  <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+    @for (tecnology of tecnologiesService.technologies(); track tecnology.name) {
+    <app-tecnology-card [tecnology]="tecnology"></app-tecnology-card>
+    }
+  </div>
+</section>
+
+<!-- secction last projects -->
+<section class="py-20 px-6 max-w-6xl mx-auto border-t border-gray-100">
+  <app-section-title title="Proyectos Destacados"></app-section-title>
+  <p class="text-gray-500 mt-4 max-w-2xl text-lg">
+    Una selección de proyectos que demuestran mi experiencia en desarrollo.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+    <!-- view only 3   projects -->
+    @for (project of projectsService.projects().slice(0, 3); track project.title) {
+    <app-project-card [project]="project"></app-project-card>
+    }
+  </div>
+</section>

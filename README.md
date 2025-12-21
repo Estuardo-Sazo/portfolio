@@ -1,59 +1,71 @@
-# JaszcodeWeb
+# Jaime Sazo | Full Stack Developer Portfolio
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.2.
+Este es el repositorio oficial de mi portafolio profesional, diseñado para mostrar mis habilidades, experiencia y proyectos destacados como Ingeniero de Software y Desarrollador Full Stack.
 
-## Development server
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
-To start a local development server, run:
+## Características Principales
 
-```bash
-ng serve
+- **Diseño Moderno & Responsivo**: Implementación de **Bento Grid** para la sección de proyectos y un diseño fluido adaptado a móviles.
+- **Arquitectura Limpia**: Estructura de código modular basada en las mejores prácticas de Angular (Componentes Standalone, Signals, Services).
+- **Alto Rendimiento**: Carga rápida optimizada, uso de imágenes lazy-loading y estilos utilitarios con Tailwind CSS.
+- **Micro-interacciones**: Efectos de glassmorphism, hover states suaves y transiciones fluidas para una mejor experiencia de usuario.
+
+## Stack Tecnológico
+
+Este portafolio está construido con la última tecnología web:
+
+- **Frontend**: Angular 20+ (Signals, Control Flow Syntax `@if`, `@for`).
+- **Estilos**: Tailwind CSS v4.
+- **Routing**: Angular Router con Lazy Loading implícito.
+- **Gestión de Estado**: Angular Signals.
+
+## Estructura del Proyecto
+
+El proyecto sigue una arquitectura organizada para escalabilidad:
+
+```
+src/app/
+├── core/           # Servicios singlenton y modelos de datos (ProjectsService, Models)
+├── pages/          # Vistas principales (Home, Projects, Contact, 404)
+├── shared/         # Componentes reutilizables UI (Navbar, SectionTitle, Cards)
+└── app.routes.ts   # Configuración de rutas
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Instalación y Ejecución
 
-## Code scaffolding
+Para correr este proyecto localmente:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1.  **Clonar el repositorio**
 
-```bash
-ng generate component component-name
-```
+    ```bash
+    git clone https://github.com/tu-usuario/jaszcode-web.git
+    cd jaszcode-web
+    ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+2.  **Instalar dependencias**
 
-```bash
-ng generate --help
-```
+    ```bash
+    npm install
+    ```
 
-## Building
+3.  **Iniciar servidor de desarrollo**
+    ```bash
+    ng serve
+    ```
+    Navega a `http://localhost:4200/`.
 
-To build the project run:
+## 📬 Contacto
 
-```bash
-ng build
-```
+Si deseas colaborar o tienes alguna pregunta, no dudes en contactarme:
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- **LinkedIn**: [Jaime Sazo](https://www.linkedin.com/in/jaime-estuardo-sazo-cort%C3%A9z-675947206)
+- **GitHub**: [Estuardo-Sazo](https://github.com/Estuardo-Sazo)
+- **Email**: iaimeestuardosazo@gmail.com
 
-## Running unit tests
+---
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Desarrollado con ❤️ por **Jaime Sazo**.

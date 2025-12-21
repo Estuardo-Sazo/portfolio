@@ -1,0 +1,56 @@
+<section class="max-w-4xl mx-auto px-6 py-12">
+  <div class="mb-12 text-center">
+    <app-section-title title="Contáctame"></app-section-title>
+    <p class="text-zinc-500 mt-4 text-lg">
+      ¿Tienes un proyecto en mente o quieres colaborar? Envíame un mensaje.
+    </p>
+  </div>
+
+  <div class="bg-white border border-zinc-100 rounded-2xl p-8 shadow-sm max-w-2xl mx-auto">
+    <form (submit)="onSubmit($event)">
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <div class="flex flex-col gap-2">
+          <label for="name" class="text-sm font-medium text-zinc-700">Nombre</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="px-4 py-2 border border-zinc-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+            placeholder="Tu nombre"
+          />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="email" class="text-sm font-medium text-zinc-700">Correo</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="px-4 py-2 border border-zinc-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+            placeholder="tu@correo.com"
+          />
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-2 mb-8">
+        <label for="message" class="text-sm font-medium text-zinc-700">Mensaje</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          required
+          class="px-4 py-2 border border-zinc-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none"
+          placeholder="¿En qué puedo ayudarte?"
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-blue-600 text-white font-medium py-3 rounded-xl hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20 active:scale-[0.98]"
+      >
+        Enviar Mensaje
+      </button>
+    </form>
+  </div>
+</section>
