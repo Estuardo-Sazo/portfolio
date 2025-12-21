@@ -1,6 +1,6 @@
 {
   "framework": null,
-  "outputDirectory": "dist/jaszcode-web",
+  "outputDirectory": "dist/jaszcode-web/browser",
   "routes": [
     {
       "src": "/(.*)",

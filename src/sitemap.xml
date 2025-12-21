@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://github.com/Estuardo-Sazo/portfolio</loc>
+    <loc>https://portfolio-alpha-jade-18.vercel.app</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://github.com/Estuardo-Sazo/portfolioprojects</loc>
+    <loc>https://portfolio-alpha-jade-18.vercel.app/projects</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://github.com/Estuardo-Sazo/portfoliocontact</loc>
+    <loc>https://portfolio-alpha-jade-18.vercel.app/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
