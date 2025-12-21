@@ -5,7 +5,7 @@
       "src": "angular.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist/jaszcode-web/browser",
+        "distDir": "dist/jaszcode-web/browser"
       }
     }
   ],
