@@ -79,7 +79,14 @@
     role="heading"
     aria-level="3"
   >
+    @if (project.id) {
+    <a [routerLink]="['/projects', project.id]" class="hover:underline focus:outline-none">
+      <span class="absolute inset-0" aria-hidden="true"></span>
+      {{ project.title }}
+    </a>
+    } @else {
     {{ project.title }}
+    }
   </h3>
 
   <!-- DESCRIPTION -->
