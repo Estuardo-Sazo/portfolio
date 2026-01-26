@@ -13,8 +13,8 @@ export class TechnologiesService {
     { name: 'MySQL', icon: 'icons/mysql.png' },
     { name: 'MongoDB', icon: 'icons/mongodb.svg' },
     { name: 'PostgreSQL', icon: 'icons/postgresql.jpeg' },
-    { name: 'Git', icon: 'icons/git.svg' },
     { name: 'Docker', icon: 'icons/docker.svg' },
+    { name: 'Git', icon: 'icons/git.svg' },
     { name: 'n8n', icon: 'icons/n8n.png' },
   ]);
 
