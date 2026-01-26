@@ -3,6 +3,29 @@ import { Project } from '../models/project.model';
 
 export const PROJECTS_DATA: Project[] = [
   {
+    id: 'splitq-gt',
+    title: 'SplitQ-GT',
+    description: 'SplitQ con Divide gastos, no amistades',
+    fullDescription: `
+        La forma más fácil de dividir gastos con tus compañeros de trabajo, amigos o familia. Olvídate de las cuentas mentales y los “después te pago”.
+        Todo lo que necesitas para dividir sin problemas
+        Diseñado para grupos pequeños que quieren mantener las cuentas claras sin complicarse la vida.
+      `,
+    technologies: ['React', 'Supabase', 'Google Auth', 'Vercel', 'PWA'],
+    demoUrl: 'https://www.splitq.site',
+    status: 'production',
+    featured: false,
+    gallery: [
+      '/images/splitq/image1.png',
+      '/images/splitq/image2.png',
+      '/images/splitq/image3.png',
+      '/images/splitq/image4.png',
+      '/images/splitq/image5.png',
+      '/images/splitq/image6.png',
+      '/images/splitq/image7.png',
+    ],
+  },
+  {
     id: 'mi-flota-app',
     title: 'App web PWA Mi Flota',
     description:
