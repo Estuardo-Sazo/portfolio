@@ -15,11 +15,17 @@ import { Meta } from '@angular/platform-browser';
   styleUrl: './home.css',
 })
 export class Home implements OnInit {
+  readonly careerStartYear = 2019;
+
   tecnologiesService = inject(TechnologiesService);
   projectsService = inject(ProjectsService);
 
   private title = inject(Title);
   private meta = inject(Meta);
+
+  get yearsOfExperience(): number {
+    return new Date().getFullYear() - this.careerStartYear;
+  }
 
   ngOnInit() {
     this.title.setTitle('Jaime Sazo | Desarrollador Full Stack Angular');
