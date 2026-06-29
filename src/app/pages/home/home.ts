@@ -5,12 +5,12 @@ import { TechnologiesService } from '../../core/services/technologies-service';
 import { TecnologyCard } from '../../shared/ui/tecnology-card/tecnology-card';
 import { ProjectsService } from '../../core/services/projects';
 import { ProjectCard } from '../../shared/ui/project-card/project-card';
-import { Title } from '@angular/platform-browser';
-import { Meta } from '@angular/platform-browser';
+import { SeoService } from '../../core/services/seo';
+import { RevealDirective } from '../../shared/directives/reveal';
 
 @Component({
   selector: 'app-home',
-  imports: [SectionTitle, TecnologyCard, RouterLink, ProjectCard],
+  imports: [SectionTitle, TecnologyCard, RouterLink, ProjectCard, RevealDirective],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -20,20 +20,19 @@ export class Home implements OnInit {
   tecnologiesService = inject(TechnologiesService);
   projectsService = inject(ProjectsService);
 
-  private title = inject(Title);
-  private meta = inject(Meta);
+  private seo = inject(SeoService);
 
   get yearsOfExperience(): number {
     return new Date().getFullYear() - this.careerStartYear;
   }
 
   ngOnInit() {
-    this.title.setTitle('Jaime Sazo | Desarrollador Full Stack Angular');
-
-    this.meta.updateTag({
-      name: 'description',
-      content:
-        'Portafolio profesional de Jaime Sazo. Desarrollo aplicaciones modernas con Angular y NestJS.',
+    this.seo.update({
+      title: 'Desarrollador Full Stack',
+      description:
+        'Ingeniero de Sistemas y desarrollador full-stack. Construyo aplicaciones web escalables con Angular, NestJS, Laravel y Odoo.',
+      path: '/',
+      type: 'profile',
     });
   }
 }

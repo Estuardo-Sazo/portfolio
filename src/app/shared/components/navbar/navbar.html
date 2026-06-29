@@ -1,103 +1,111 @@
-<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-  <div class="px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
+<nav class="sticky top-0 z-50 bg-bg/70 backdrop-blur-xl border-b border-line">
+  <div class="px-6 py-3.5 flex justify-between items-center max-w-6xl mx-auto">
     <a
       routerLink="/"
-      class="text-lg font-bold text-gray-900 tracking-tight flex items-center gap-2"
+      class="group flex items-center gap-2 text-base font-bold text-ink tracking-tight"
     >
+      <span
+        class="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-brand to-brand-2 font-mono text-sm text-white shadow-lg shadow-brand/20"
+        >JS</span
+      >
       Jaime Sazo
     </a>
 
     <!-- DESKTOP MENU -->
-    <div class="hidden md:flex space-x-8">
+    <div class="hidden md:flex items-center gap-1">
       <a
         routerLink="/"
-        routerLinkActive="text-blue-600 font-semibold"
+        routerLinkActive="!text-ink bg-elevated"
         [routerLinkActiveOptions]="{ exact: true }"
-        class="text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors"
+        class="px-3 py-1.5 rounded-lg text-sm font-medium text-muted hover:text-ink hover:bg-elevated transition-colors"
         >Inicio</a
       >
       <a
         routerLink="/projects"
-        routerLinkActive="text-blue-600 font-semibold"
-        class="text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors"
+        routerLinkActive="!text-ink bg-elevated"
+        class="px-3 py-1.5 rounded-lg text-sm font-medium text-muted hover:text-ink hover:bg-elevated transition-colors"
         >Proyectos</a
       >
       <a
         routerLink="/contact"
-        routerLinkActive="text-blue-600 font-semibold"
-        class="text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors"
+        routerLinkActive="!text-ink bg-elevated"
+        class="px-3 py-1.5 rounded-lg text-sm font-medium text-muted hover:text-ink hover:bg-elevated transition-colors"
         >Contacto</a
       >
+      <div class="ml-2 pl-2 border-l border-line">
+        <app-theme-toggle></app-theme-toggle>
+      </div>
     </div>
 
-    <!-- MOBILE TOGGLE -->
-    <button
-      (click)="toggleMenu()"
-      class="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-      aria-label="Toggle menu"
-    >
-      @if (!isOpen()) {
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="lucide lucide-menu"
+    <!-- MOBILE CONTROLS -->
+    <div class="md:hidden flex items-center gap-2">
+      <app-theme-toggle></app-theme-toggle>
+      <button
+        (click)="toggleMenu()"
+        class="p-2 text-muted hover:text-ink hover:bg-elevated rounded-lg transition-colors"
+        aria-label="Toggle menu"
       >
-        <line x1="4" x2="20" y1="12" y2="12" />
-        <line x1="4" x2="20" y1="6" y2="6" />
-        <line x1="4" x2="20" y1="18" y2="18" />
-      </svg>
-      } @else {
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="lucide lucide-x"
-      >
-        <path d="M18 6 6 18" />
-        <path d="m6 6 18 12" />
-      </svg>
-      }
-    </button>
+        @if (!isOpen()) {
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="4" x2="20" y1="12" y2="12" />
+          <line x1="4" x2="20" y1="6" y2="6" />
+          <line x1="4" x2="20" y1="18" y2="18" />
+        </svg>
+        } @else {
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+        }
+      </button>
+    </div>
   </div>
 
   <!-- MOBILE MENU -->
   @if(isOpen()) {
   <div
-    class="md:hidden border-t border-gray-100 bg-white absolute w-full left-0 animate-fade-in px-6 py-4 flex flex-col gap-4 shadow-lg"
+    class="md:hidden border-t border-line bg-bg/95 backdrop-blur-xl absolute w-full left-0 animate-fade-in px-6 py-4 flex flex-col gap-2 shadow-2xl"
   >
     <a
       routerLink="/"
       (click)="closeMenu()"
-      routerLinkActive="text-blue-600 bg-blue-50"
+      routerLinkActive="!text-ink bg-elevated"
       [routerLinkActiveOptions]="{ exact: true }"
-      class="text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50 px-4 py-2 rounded-lg transition-colors"
+      class="text-base font-medium text-muted hover:text-ink hover:bg-elevated px-4 py-2.5 rounded-lg transition-colors"
       >Inicio</a
     >
     <a
       routerLink="/projects"
       (click)="closeMenu()"
-      routerLinkActive="text-blue-600 bg-blue-50"
-      class="text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50 px-4 py-2 rounded-lg transition-colors"
+      routerLinkActive="!text-ink bg-elevated"
+      class="text-base font-medium text-muted hover:text-ink hover:bg-elevated px-4 py-2.5 rounded-lg transition-colors"
       >Proyectos</a
     >
     <a
       routerLink="/contact"
       (click)="closeMenu()"
-      routerLinkActive="text-blue-600 bg-blue-50"
-      class="text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50 px-4 py-2 rounded-lg transition-colors"
+      routerLinkActive="!text-ink bg-elevated"
+      class="text-base font-medium text-muted hover:text-ink hover:bg-elevated px-4 py-2.5 rounded-lg transition-colors"
       >Contacto</a
     >
   </div>

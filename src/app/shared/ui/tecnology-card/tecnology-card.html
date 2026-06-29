@@ -1,11 +1,13 @@
 <div
-  class="p-6 bg-white border border-gray-100 rounded-2xl hover:border-gray-200 hover:shadow-sm transition-all flex flex-col items-center justify-center gap-3"
+  class="group flex flex-col items-center justify-center gap-3 p-6 rounded-2xl border border-line bg-card hover:border-brand/40 hover:bg-elevated transition-all duration-300 hover:-translate-y-1"
 >
   <img
-    src="{{ tecnology()?.icon }}"
-    alt="Angular"
-    class="md:w-12 md:h-12 w-10 h-10"
+    [src]="tecnology()?.icon"
+    [alt]="tecnology()?.name"
+    class="w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 group-hover:scale-110"
     loading="lazy"
   />
-  <span class="font-medium md:text-md text-sm text-gray-700">{{ tecnology()?.name }}</span>
+  <span class="text-sm md:text-base font-medium text-muted group-hover:text-ink transition-colors">{{
+    tecnology()?.name
+  }}</span>
 </div>

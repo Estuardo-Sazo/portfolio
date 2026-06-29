@@ -1,21 +1,174 @@
-/* Global Styles */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* ============================================================
+   Global Styles — Design System (dark-first, dev aesthetic)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import 'tailwindcss';
 
+/* Class-based dark mode (dark is the default, see index.html) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---- Design tokens ---------------------------------------- */
 @theme {
-  --font-sans: 'Inter', sans-serif;
-  --color-primary: #2563eb; /* Royal Blue */
-  --color-surface: #ffffff;
-  --color-background: #f8fafc; /* Slate 50 */
-  --color-text-main: #0f172a; /* Slate 900 */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+  /* Semantic colors resolve to runtime CSS vars (theme-switchable) */
+  --color-bg: var(--c-base);
+  --color-card: var(--c-card);
+  --color-elevated: var(--c-elevated);
+  --color-line: var(--c-line);
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-faint: var(--c-faint);
+  --color-brand: var(--c-brand);
+  --color-brand-2: var(--c-brand-2);
+}
+
+/* ---- Light theme ------------------------------------------ */
+:root {
+  --c-base: #ffffff;
+  --c-card: #ffffff;
+  --c-elevated: #f4f4f5;
+  --c-line: #e4e4e7;
+  --c-ink: #09090b;
+  --c-muted: #52525b;
+  --c-faint: #71717a;
+  --c-brand: #2563eb;
+  --c-brand-2: #7c3aed;
+  --grid-line: rgba(0, 0, 0, 0.045);
+  --glow-1: rgba(37, 99, 235, 0.1);
+  --glow-2: rgba(124, 58, 237, 0.08);
+  color-scheme: light;
+}
+
+/* ---- Dark theme (default) --------------------------------- */
+.dark {
+  --c-base: #0a0a0c;
+  --c-card: #121215;
+  --c-elevated: #1b1b20;
+  --c-line: #27272a;
+  --c-ink: #fafafa;
+  --c-muted: #a1a1aa;
+  --c-faint: #71717a;
+  --c-brand: #5b8cff;
+  --c-brand-2: #a78bfa;
+  --grid-line: rgba(255, 255, 255, 0.035);
+  --glow-1: rgba(59, 110, 246, 0.18);
+  --glow-2: rgba(139, 92, 246, 0.14);
+  color-scheme: dark;
+}
+
+/* ---- Base ------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--color-background);
-  color: var(--color-text-main);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-  background-size: 32px 32px;
+  font-family: var(--font-sans);
+  background-color: var(--c-base);
+  color: var(--c-ink);
   @apply antialiased;
+  min-height: 100vh;
+  /* Subtle grid + ambient glow */
+  background-image: radial-gradient(
+      60rem 40rem at 75% -10%,
+      var(--glow-1),
+      transparent 70%
+    ),
+    radial-gradient(50rem 35rem at 10% 5%, var(--glow-2), transparent 70%),
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+  background-attachment: fixed;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Selection */
+::selection {
+  background: color-mix(in srgb, var(--c-brand) 35%, transparent);
+  color: var(--c-ink);
+}
+
+/* Scrollbar (dark-friendly) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--c-line);
+  border-radius: 9999px;
+  border: 2px solid var(--c-base);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-faint);
+}
+
+/* ---- Utilities -------------------------------------------- */
+/* Gradient text for hero accents */
+.text-gradient {
+  background: linear-gradient(120deg, var(--c-brand), var(--c-brand-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ---- Animations ------------------------------------------- */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease both;
+}
+
+/* Scroll reveal: hidden until .is-visible is added by the directive */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-fade-in-up,
+  .animate-fade-in {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

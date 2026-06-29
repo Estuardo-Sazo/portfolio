@@ -3,6 +3,32 @@ import { Project } from '../models/project.model';
 
 export const PROJECTS_DATA: Project[] = [
   {
+    id: 'scanstock',
+    title: 'ScanStock',
+    description:
+      'App de inventarios con escáner de código de barras y base de productos, todo guardado localmente en el dispositivo.',
+    fullDescription: `
+        ScanStock es una aplicación para realizar inventarios de forma rápida y sin depender de internet.
+        Permite crear y administrar una base de productos propia y registrar conteos usando el escáner de
+        código de barras de la cámara, ideal para tomas de inventario en bodega o tienda.
+
+        Toda la información se guarda localmente en el dispositivo con Dexie.js (IndexedDB), por lo que
+        funciona completamente offline. Construida con Ionic + Angular y Capacitor, también permite exportar
+        los resultados a Excel.
+      `,
+    technologies: ['Ionic', 'Angular', 'Capacitor', 'Dexie.js', 'ZXing', 'PWA'],
+    demoUrl: 'https://estuardo-sazo.github.io/ScanStock/inventories',
+    githubUrl: 'https://github.com/Estuardo-Sazo/ScanStock',
+    status: 'production',
+    featured: false,
+    gallery: [
+      '/images/scanstock/image1.PNG',
+      '/images/scanstock/image2.PNG',
+      '/images/scanstock/image3.PNG',
+      '/images/scanstock/image4.PNG',
+    ],
+  },
+  {
     id: 'splitq-gt',
     title: 'SplitQ-GT',
     description: 'SplitQ con Divide gastos, no amistades',

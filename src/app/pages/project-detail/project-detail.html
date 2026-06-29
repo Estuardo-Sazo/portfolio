@@ -1,9 +1,9 @@
-<div class="min-h-screen pt-24 pb-20 px-6">
+<div class="min-h-screen pt-16 pb-20 px-6">
   <div class="max-w-4xl mx-auto">
     <!-- Back Button -->
     <button
       (click)="goBack()"
-      class="mb-8 flex items-center gap-2 text-zinc-500 hover:text-blue-600 transition-colors group font-medium"
+      class="mb-10 flex items-center gap-2 text-muted hover:text-brand transition-colors group font-medium"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -25,14 +25,14 @@
     @if (project) {
     <header class="mb-12">
       <!-- Title -->
-      <h1 class="text-4xl md:text-5xl font-bold text-zinc-900 mb-6 leading-tight tracking-tight">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-ink mb-6 leading-tight tracking-tight">
         {{ project.title }}
       </h1>
       <!-- Tech Stack -->
       <div class="flex flex-wrap gap-2 mb-6">
         @for (tech of project.technologies; track tech) {
         <span
-          class="px-3 py-1 rounded-md text-xs font-medium bg-zinc-100 text-zinc-700 border border-zinc-200"
+          class="px-3 py-1 rounded-md text-xs font-mono font-medium bg-elevated text-muted border border-line"
         >
           {{ tech }}
         </span>
@@ -40,7 +40,7 @@
       </div>
 
       <!-- Short Description -->
-      <p class="text-xl text-zinc-600 leading-relaxed max-w-2xl text-balance">
+      <p class="text-xl text-muted leading-relaxed max-w-2xl text-balance">
         {{ project.description }}
       </p>
 
@@ -51,7 +51,7 @@
           [href]="project.demoUrl"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-zinc-900 text-white font-semibold hover:bg-zinc-800 transition-colors shadow-lg shadow-zinc-200"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-ink text-bg font-semibold hover:opacity-90 transition-all active:scale-[0.98]"
         >
           <span>Ver Demo</span>
           <svg
@@ -75,22 +75,12 @@
           [href]="project.githubUrl"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-zinc-700 font-semibold border border-zinc-200 hover:bg-zinc-50 hover:text-zinc-900 hover:border-zinc-300 transition-colors shadow-sm"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-card text-ink font-semibold border border-line hover:bg-elevated hover:border-brand/40 transition-all"
         >
           <span>Código</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path
-              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+              d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.36 9.36 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"
             />
           </svg>
         </a>
@@ -101,9 +91,9 @@
     <div class="space-y-16">
       <!-- Full Description -->
       @if (project.fullDescription) {
-      <section class="prose prose-zinc prose-lg max-w-none">
+      <section>
         <div
-          class="bg-white rounded-2xl p-8 border border-zinc-100 shadow-xl shadow-zinc-100/50 whitespace-pre-line text-zinc-600"
+          class="bg-card rounded-2xl p-8 border border-line whitespace-pre-line text-muted text-lg leading-relaxed"
         >
           {{ project.fullDescription }}
         </div>
@@ -113,14 +103,14 @@
       <!-- Gallery -->
       @if (project.gallery && project.gallery.length > 0) {
       <section>
-        <h2 class="text-2xl font-bold text-zinc-900 mb-6 flex items-center gap-2">
+        <h2 class="text-2xl font-bold text-ink mb-6 flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            class="text-blue-600"
+            class="text-brand"
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
@@ -136,7 +126,7 @@
           @for (image of project.gallery; track image; let i = $index) {
           <div
             (click)="openLightbox(i)"
-            class="relative break-inside-avoid rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 group shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            class="relative break-inside-avoid rounded-xl overflow-hidden bg-card border border-line group hover:border-brand/40 transition-colors cursor-pointer"
           >
             <img
               [src]="image"
@@ -238,7 +228,7 @@
       <!-- Videos -->
       @if (safeVideoUrls.length > 0) {
       <section>
-        <h2 class="text-2xl font-bold text-zinc-900 mb-6 flex items-center gap-2">
+        <h2 class="text-2xl font-bold text-ink mb-6 flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -259,7 +249,7 @@
         <div class="grid grid-cols-1 gap-8">
           @for (videoUrl of safeVideoUrls; track $index) {
           <div
-            class="relative aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 shadow-xl shadow-zinc-200/50"
+            class="relative aspect-video rounded-xl overflow-hidden bg-card border border-line"
           >
             <iframe
               [src]="videoUrl"

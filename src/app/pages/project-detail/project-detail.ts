@@ -1,22 +1,21 @@
 import { Component, HostListener, inject, Input, OnInit } from '@angular/core';
-import { CommonModule, Location } from '@angular/common';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DomSanitizer, Meta, SafeResourceUrl, Title } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ProjectsService } from '../../core/services/projects';
+import { SeoService } from '../../core/services/seo';
 import { Project } from '../../core/models/project.model';
 
 @Component({
   selector: 'app-project-detail',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './project-detail.html',
 })
 export class ProjectDetail implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private projectsService = inject(ProjectsService);
-  private titleService = inject(Title);
-  private metaService = inject(Meta);
+  private seo = inject(SeoService);
   private sanitizer = inject(DomSanitizer);
   public location = inject(Location);
 
@@ -45,13 +44,13 @@ export class ProjectDetail implements OnInit {
   updateMetaTags() {
     if (!this.project) return;
 
-    this.titleService.setTitle(`${this.project.title} | Jaime Sazo`);
-    this.metaService.updateTag({ name: 'description', content: this.project.description });
-
-    // Open Graph
-    this.metaService.updateTag({ property: 'og:title', content: this.project.title });
-    this.metaService.updateTag({ property: 'og:description', content: this.project.description });
-    // this.metaService.updateTag({ property: 'og:image', content: this.project.coverImage }); // Assuming coverImage exists or use a default
+    this.seo.update({
+      title: this.project.title,
+      description: this.project.description,
+      image: this.project.gallery?.[0],
+      path: `/projects/${this.project.id}`,
+      type: 'article',
+    });
   }
 
   sanitizeVideoUrls() {
