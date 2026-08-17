@@ -3,6 +3,34 @@ import { Project } from '../models/project.model';
 
 export const PROJECTS_DATA: Project[] = [
   {
+    id: 'imagenes-por-hoja',
+    title: 'Imágenes por Hoja',
+    description:
+      'Herramienta web que acomoda automáticamente varias imágenes en una hoja para imprimir. Eliges cuántas van por página y calcula el mejor aprovechamiento del papel.',
+    fullDescription: `
+        Imágenes por Hoja resuelve una tarea repetitiva: colocar varias imágenes en una misma página
+        para imprimirlas. En lugar de acomodarlas a mano en Word, se indica cuántas se quieren por hoja
+        y un motor propio calcula el tamaño y la posición de cada una, respetando los márgenes al
+        milímetro y sin deformar ninguna.
+
+        El motor evalúa todas las formas posibles de repartir las imágenes en filas y elige la que cubre
+        más superficie útil, adaptándose a las proporciones reales de cada foto. El resultado se puede
+        imprimir, guardar en PDF o descargar como documento de Word editable, generado sin librerías
+        externas escribiendo el OOXML y empaquetando el ZIP a mano. Todo el procesamiento ocurre en el navegador: las imágenes nunca se suben a un servidor.
+      `,
+    technologies: ['Astro', 'React', 'TypeScript', 'Canvas API', 'OOXML', 'Vitest', 'Vercel'],
+    demoUrl: 'https://imagenesporhoja.vercel.app/',
+    githubUrl: 'https://github.com/Estuardo-Sazo/imagenesporhoja',
+    status: 'production',
+    featured: true,
+    gallery: [
+      '/images/imagenes-por-hoja/image1.png',
+      '/images/imagenes-por-hoja/image2.png',
+      '/images/imagenes-por-hoja/image3.png',
+      '/images/imagenes-por-hoja/image4.png',
+    ],
+  },
+  {
     id: 'scanstock',
     title: 'ScanStock',
     description:
