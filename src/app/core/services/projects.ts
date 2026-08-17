@@ -59,7 +59,8 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 'splitq-gt',
     title: 'SplitQ-GT',
-    description: 'SplitQ con Divide gastos, no amistades',
+    description:
+      'Divide gastos entre amigos, compañeros de trabajo o familia sin cuentas mentales ni hojas de cálculo. Inicia sesión con Google y organiza todo en segundos.',
     fullDescription: `
         La forma más fácil de dividir gastos con tus compañeros de trabajo, amigos o familia. Olvídate de las cuentas mentales y los “después te pago”.
         Todo lo que necesitas para dividir sin problemas
@@ -103,7 +104,8 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 'docualchilazo',
     title: 'DocuAlChilazo',
-    description: 'Genera cartas, solicitudes, contratos y más con un editor visual tipo Canva.',
+    description:
+      'Genera cartas, solicitudes, contratos y documentos legales con un editor visual tipo Canva, listos para descargar en PDF en minutos.',
     fullDescription: `
         Ahorra tiempo, mantiene formato perfecto y descarga en PDF listo para usar.
         
