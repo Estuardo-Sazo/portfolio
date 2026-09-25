@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { DOCUMENT, inject, Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
 const SITE = 'https://www.jaszcode.site';
@@ -19,6 +19,7 @@ export interface SeoData {
 export class SeoService {
   private title = inject(Title);
   private meta = inject(Meta);
+  private document = inject(DOCUMENT);
 
   update(data: SeoData): void {
     const url = `${SITE}${data.path ?? ''}`;
@@ -26,6 +27,8 @@ export class SeoService {
     const fullTitle = `${data.title} | ${AUTHOR}`;
 
     this.title.setTitle(fullTitle);
+    this.setCanonical(url);
+    this.meta.removeTag("name='robots'");
     this.meta.updateTag({ name: 'description', content: data.description });
     this.meta.updateTag({ name: 'author', content: AUTHOR });
 
@@ -42,6 +45,21 @@ export class SeoService {
     this.meta.updateTag({ name: 'twitter:title', content: fullTitle });
     this.meta.updateTag({ name: 'twitter:description', content: data.description });
     this.meta.updateTag({ name: 'twitter:image', content: image });
+  }
+
+  /** Keeps pages like the 404 out of Google's index. */
+  noIndex(): void {
+    this.meta.updateTag({ name: 'robots', content: 'noindex' });
+  }
+
+  private setCanonical(url: string): void {
+    let link = this.document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!link) {
+      link = this.document.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      this.document.head.appendChild(link);
+    }
+    link.setAttribute('href', url);
   }
 
   private absolute(image: string): string {
