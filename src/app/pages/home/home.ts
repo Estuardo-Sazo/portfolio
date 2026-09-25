@@ -7,10 +7,11 @@ import { ProjectsService } from '../../core/services/projects';
 import { ProjectCard } from '../../shared/ui/project-card/project-card';
 import { SeoService } from '../../core/services/seo';
 import { RevealDirective } from '../../shared/directives/reveal';
+import { CountUpDirective } from '../../shared/directives/count-up';
 
 @Component({
   selector: 'app-home',
-  imports: [SectionTitle, TecnologyCard, RouterLink, ProjectCard, RevealDirective],
+  imports: [SectionTitle, TecnologyCard, RouterLink, ProjectCard, RevealDirective, CountUpDirective],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

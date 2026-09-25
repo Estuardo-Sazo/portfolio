@@ -59,15 +59,15 @@
     <!-- Quick stats -->
     <div class="flex flex-wrap gap-8 mt-14 pt-8 border-t border-line">
       <div>
-        <div class="text-3xl font-bold text-ink">{{ yearsOfExperience }}+</div>
+        <div class="text-3xl font-bold text-ink tabular-nums"><span [appCountUp]="yearsOfExperience"></span>+</div>
         <div class="text-sm text-faint mt-1">Años de experiencia</div>
       </div>
       <div>
-        <div class="text-3xl font-bold text-ink">{{ projectsService.projects().length }}+</div>
+        <div class="text-3xl font-bold text-ink tabular-nums"><span [appCountUp]="projectsService.projects().length"></span>+</div>
         <div class="text-sm text-faint mt-1">Proyectos</div>
       </div>
       <div>
-        <div class="text-3xl font-bold text-ink">{{ tecnologiesService.technologies().length }}+</div>
+        <div class="text-3xl font-bold text-ink tabular-nums"><span [appCountUp]="tecnologiesService.technologies().length"></span>+</div>
         <div class="text-sm text-faint mt-1">Tecnologías</div>
       </div>
     </div>
