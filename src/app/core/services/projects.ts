@@ -55,6 +55,7 @@ export const PROJECTS_DATA: Project[] = [
       '/images/scanstock/image3.PNG',
       '/images/scanstock/image4.PNG',
     ],
+    galleryLayout: 'mobile',
   },
   {
     id: 'splitq-gt',
@@ -100,6 +101,7 @@ export const PROJECTS_DATA: Project[] = [
       '/images/miflota/image02.png',
       '/images/miflota/image03.png',
     ],
+    galleryLayout: 'mobile',
   },
   {
     id: 'docualchilazo',

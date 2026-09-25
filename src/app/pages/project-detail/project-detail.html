@@ -1,271 +1,408 @@
-<div class="min-h-screen pt-16 pb-20 px-6">
-  <div class="max-w-4xl mx-auto">
-    <!-- Back Button -->
+@if (project) {
+<article class="min-h-screen pt-12 pb-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <!-- Breadcrumb -->
+    <nav aria-label="Ruta de navegación" class="mb-10 flex items-center gap-2 text-sm text-faint">
+      <a routerLink="/projects" class="group flex items-center gap-1.5 hover:text-brand transition-colors">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="group-hover:-translate-x-0.5 transition-transform"
+        >
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+        Proyectos
+      </a>
+      <span aria-hidden="true">/</span>
+      <span class="text-muted truncate" aria-current="page">{{ project.title }}</span>
+    </nav>
+
+    <!-- HERO -->
+    <header class="grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-16 items-center mb-20">
+      <div appReveal>
+        <span
+          class="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full border mb-5"
+          [class]="statusMeta[project.status].chip"
+        >
+          <span class="w-1.5 h-1.5 rounded-full" [class]="statusMeta[project.status].dot"></span>
+          {{ statusMeta[project.status].label }}
+        </span>
+
+        <h1 class="text-4xl md:text-5xl font-extrabold text-ink mb-5 leading-tight tracking-tight text-balance">
+          {{ project.title }}
+        </h1>
+
+        <p class="text-lg md:text-xl text-muted leading-relaxed text-pretty">
+          {{ project.description }}
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap gap-3 mt-8">
+          @if (project.demoUrl) {
+          <a
+            [href]="project.demoUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-ink text-bg font-semibold hover:opacity-90 transition-all active:scale-[0.98]"
+          >
+            {{ project.status === 'video' ? 'Ver en YouTube' : 'Ver demo en vivo' }}
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M15 3h6v6" />
+              <path d="M10 14 21 3" />
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            </svg>
+          </a>
+          } @if (project.githubUrl) {
+          <a
+            [href]="project.githubUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-card text-ink font-semibold border border-line hover:bg-elevated hover:border-brand/40 transition-all"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.36 9.36 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"
+              />
+            </svg>
+            Ver código
+          </a>
+          }
+        </div>
+      </div>
+
+      <!-- Hero media: video, first screenshot framed as device, or nothing -->
+      <div appReveal [revealDelay]="120" class="relative">
+        <div
+          class="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-brand/20 to-brand-2/20 blur-3xl pointer-events-none"
+          aria-hidden="true"
+        ></div>
+
+        @if (safeVideoUrls.length > 0) {
+        <div class="relative aspect-video rounded-2xl overflow-hidden bg-card border border-line shadow-2xl">
+          <iframe
+            [src]="safeVideoUrls[0]"
+            [title]="'Video demo de ' + project.title"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            class="absolute inset-0 w-full h-full"
+          ></iframe>
+        </div>
+        } @else if (project.gallery?.length) { @if (isMobileGallery) {
+        <!-- Phone frame -->
+        <button
+          type="button"
+          (click)="openLightbox(0)"
+          [attr.aria-label]="'Ampliar captura de ' + project.title"
+          class="relative mx-auto block w-fit rounded-[2.2rem] border-[6px] border-ink/10 bg-card p-1 shadow-2xl hover:-translate-y-1 transition-transform cursor-zoom-in"
+        >
+          <img
+            [src]="project.gallery![0]"
+            [alt]="'Captura principal de ' + project.title"
+            class="block max-h-[520px] w-auto rounded-[1.7rem]"
+          />
+        </button>
+        } @else {
+        <!-- Browser frame -->
+        <button
+          type="button"
+          (click)="openLightbox(0)"
+          [attr.aria-label]="'Ampliar captura de ' + project.title"
+          class="relative block w-full rounded-2xl overflow-hidden border border-line bg-card shadow-2xl hover:-translate-y-1 transition-transform cursor-zoom-in text-left"
+        >
+          <div class="flex items-center gap-1.5 px-4 py-3 border-b border-line bg-elevated">
+            <span class="h-2.5 w-2.5 rounded-full bg-red-400/80"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-amber-400/80"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-emerald-400/80"></span>
+          </div>
+          <img
+            [src]="project.gallery![0]"
+            [alt]="'Captura principal de ' + project.title"
+            class="block w-full h-auto"
+          />
+        </button>
+        } }
+      </div>
+    </header>
+
+    <!-- ABOUT + FACT SHEET -->
+    <div class="grid lg:grid-cols-[1fr_320px] gap-10 lg:gap-14 mb-20">
+      <section appReveal>
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-faint mb-4">
+          Sobre el proyecto
+        </h2>
+        @if (paragraphs.length) {
+        <div class="space-y-5 text-lg text-muted leading-relaxed max-w-prose text-pretty">
+          @for (p of paragraphs; track $index) {
+          <p>{{ p }}</p>
+          }
+        </div>
+        } @else {
+        <p class="text-lg text-muted leading-relaxed max-w-prose">{{ project.description }}</p>
+        }
+      </section>
+
+      <aside appReveal [revealDelay]="100" class="lg:sticky lg:top-24 self-start">
+        <div class="rounded-2xl border border-line bg-card p-6 space-y-6">
+          <div>
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-faint mb-3">Stack</h3>
+            <div class="flex flex-wrap gap-2">
+              @for (tech of project.technologies; track tech) {
+              <span
+                class="px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-elevated text-muted border border-line"
+              >
+                {{ tech }}
+              </span>
+              }
+            </div>
+          </div>
+
+          <div class="border-t border-line pt-5">
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-faint mb-3">Estado</h3>
+            <span class="inline-flex items-center gap-2 text-sm text-ink">
+              <span class="w-2 h-2 rounded-full" [class]="statusMeta[project.status].dot"></span>
+              {{ statusMeta[project.status].label }}
+            </span>
+          </div>
+
+          @if (project.demoUrl || project.githubUrl) {
+          <div class="border-t border-line pt-5">
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-faint mb-3">Enlaces</h3>
+            <ul class="space-y-2 text-sm">
+              @if (project.demoUrl) {
+              <li>
+                <a
+                  [href]="project.demoUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-brand hover:underline break-all"
+                  >{{ project.status === 'video' ? 'Video en YouTube' : 'Demo en vivo' }} ↗</a
+                >
+              </li>
+              } @if (project.githubUrl) {
+              <li>
+                <a
+                  [href]="project.githubUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-brand hover:underline"
+                  >Repositorio en GitHub ↗</a
+                >
+              </li>
+              }
+            </ul>
+          </div>
+          }
+        </div>
+      </aside>
+    </div>
+
+    <!-- GALLERY -->
+    @if (project.gallery && project.gallery.length > 0) {
+    <section class="mb-20">
+      <div appReveal class="flex items-end justify-between gap-4 mb-6">
+        <h2 class="text-2xl font-bold text-ink tracking-tight">Galería</h2>
+        <span class="text-sm text-faint">{{ project.gallery.length }} capturas · clic para ampliar</span>
+      </div>
+      <div
+        class="grid gap-5"
+        [class]="isMobileGallery ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4' : 'sm:grid-cols-2'"
+      >
+        @for (image of project.gallery; track image; let i = $index) {
+        <button
+          type="button"
+          appReveal
+          [revealDelay]="i * 60"
+          (click)="openLightbox(i)"
+          [attr.aria-label]="'Ampliar captura ' + (i + 1) + ' de ' + project.gallery.length"
+          class="group relative rounded-xl overflow-hidden bg-card border border-line hover:border-brand/40 transition-colors cursor-zoom-in"
+        >
+          <img
+            [src]="image"
+            [alt]="project.title + ' — captura ' + (i + 1)"
+            loading="lazy"
+            class="block w-full group-hover:scale-[1.03] transition-transform duration-500"
+            [class]="isMobileGallery ? 'h-auto' : 'aspect-[16/10] object-cover object-top'"
+          />
+        </button>
+        }
+      </div>
+    </section>
+    }
+
+    <!-- EXTRA VIDEOS -->
+    @if (safeVideoUrls.length > 1) {
+    <section class="mb-20">
+      <h2 class="text-2xl font-bold text-ink tracking-tight mb-6">Más videos</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        @for (videoUrl of safeVideoUrls.slice(1); track $index) {
+        <div class="relative aspect-video rounded-xl overflow-hidden bg-card border border-line">
+          <iframe
+            [src]="videoUrl"
+            [title]="'Video de ' + project.title"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            class="absolute inset-0 w-full h-full"
+          ></iframe>
+        </div>
+        }
+      </div>
+    </section>
+    }
+
+    <!-- CONTACT CTA -->
+    <section
+      appReveal
+      class="mb-16 rounded-2xl border border-line bg-gradient-to-br from-brand/10 to-brand-2/10 p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6"
+    >
+      <div>
+        <h2 class="text-2xl font-bold text-ink tracking-tight">¿Necesitas algo similar?</h2>
+        <p class="text-muted mt-2">Cuéntame tu idea y veamos cómo llevarla a producción.</p>
+      </div>
+      <a
+        routerLink="/contact"
+        class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-ink text-bg font-semibold hover:opacity-90 transition-all shrink-0"
+      >
+        Contactar
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M5 12h14" />
+          <path d="m12 5 7 7-7 7" />
+        </svg>
+      </a>
+    </section>
+
+    <!-- PREV / NEXT -->
+    @if (prevProject && nextProject && prevProject !== project) {
+    <nav aria-label="Otros proyectos" class="grid sm:grid-cols-2 gap-4">
+      <a
+        [routerLink]="['/projects', prevProject.id]"
+        class="group rounded-xl border border-line bg-card p-5 hover:border-brand/40 transition-colors"
+      >
+        <span class="text-xs text-faint">← Anterior</span>
+        <span class="mt-1 block font-semibold text-ink group-hover:text-brand transition-colors truncate">
+          {{ prevProject.title }}
+        </span>
+      </a>
+      <a
+        [routerLink]="['/projects', nextProject.id]"
+        class="group rounded-xl border border-line bg-card p-5 hover:border-brand/40 transition-colors sm:text-right"
+      >
+        <span class="text-xs text-faint">Siguiente →</span>
+        <span class="mt-1 block font-semibold text-ink group-hover:text-brand transition-colors truncate">
+          {{ nextProject.title }}
+        </span>
+      </a>
+    </nav>
+    }
+  </div>
+
+  <!-- Lightbox Overlay -->
+  @if (selectedImageIndex > -1 && project.gallery) {
+  <div
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="'Galería de ' + project.title"
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
+    (click)="closeLightbox()"
+  >
     <button
-      (click)="goBack()"
-      class="mb-10 flex items-center gap-2 text-muted hover:text-brand transition-colors group font-medium"
+      type="button"
+      (click)="closeLightbox()"
+      aria-label="Cerrar"
+      class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors p-2 z-50"
     >
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
+        width="32"
+        height="32"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="group-hover:-translate-x-1 transition-transform"
+      >
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </svg>
+    </button>
+
+    <button
+      type="button"
+      (click)="prevImage($event)"
+      aria-label="Imagen anterior"
+      class="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors p-2 z-50 hover:bg-white/10 rounded-full"
+    >
+      <svg
+        width="40"
+        height="40"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       >
         <path d="m15 18-6-6 6-6" />
       </svg>
-      Volver
     </button>
 
-    @if (project) {
-    <header class="mb-12">
-      <!-- Title -->
-      <h1 class="text-4xl md:text-5xl font-extrabold text-ink mb-6 leading-tight tracking-tight">
-        {{ project.title }}
-      </h1>
-      <!-- Tech Stack -->
-      <div class="flex flex-wrap gap-2 mb-6">
-        @for (tech of project.technologies; track tech) {
-        <span
-          class="px-3 py-1 rounded-md text-xs font-mono font-medium bg-elevated text-muted border border-line"
-        >
-          {{ tech }}
-        </span>
-        }
+    <div
+      class="relative max-w-7xl max-h-screen w-full h-full flex items-center justify-center"
+      (click)="$event.stopPropagation()"
+    >
+      <img
+        [src]="project.gallery[selectedImageIndex]"
+        [alt]="project.title + ' — captura ' + (selectedImageIndex + 1)"
+        class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+      />
+      <div class="absolute bottom-[-3rem] left-1/2 -translate-x-1/2 text-white/80 font-medium">
+        {{ selectedImageIndex + 1 }} / {{ project.gallery.length }}
       </div>
-
-      <!-- Short Description -->
-      <p class="text-xl text-muted leading-relaxed max-w-2xl text-balance">
-        {{ project.description }}
-      </p>
-
-      <!-- CTA Buttons -->
-      <div class="flex flex-wrap gap-4 mt-8">
-        @if (project.demoUrl) {
-        <a
-          [href]="project.demoUrl"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-ink text-bg font-semibold hover:opacity-90 transition-all active:scale-[0.98]"
-        >
-          <span>Ver Demo</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-            <polyline points="15 3 21 3 21 9" />
-            <line x1="10" y1="14" x2="21" y2="3" />
-          </svg>
-        </a>
-        } @if (project.githubUrl) {
-        <a
-          [href]="project.githubUrl"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-card text-ink font-semibold border border-line hover:bg-elevated hover:border-brand/40 transition-all"
-        >
-          <span>Código</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.36 9.36 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"
-            />
-          </svg>
-        </a>
-        }
-      </div>
-    </header>
-
-    <div class="space-y-16">
-      <!-- Full Description -->
-      @if (project.fullDescription) {
-      <section>
-        <div
-          class="bg-card rounded-2xl p-8 border border-line whitespace-pre-line text-muted text-lg leading-relaxed"
-        >
-          {{ project.fullDescription }}
-        </div>
-      </section>
-      }
-
-      <!-- Gallery -->
-      @if (project.gallery && project.gallery.length > 0) {
-      <section>
-        <h2 class="text-2xl font-bold text-ink mb-6 flex items-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            class="text-brand"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-            <circle cx="9" cy="9" r="2" />
-            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-          </svg>
-          Galería
-        </h2>
-        <div class="columns-1 md:columns-2 gap-6 space-y-6">
-          @for (image of project.gallery; track image; let i = $index) {
-          <div
-            (click)="openLightbox(i)"
-            class="relative break-inside-avoid rounded-xl overflow-hidden bg-card border border-line group hover:border-brand/40 transition-colors cursor-pointer"
-          >
-            <img
-              [src]="image"
-              [alt]="project.title"
-              class="w-full h-auto group-hover:scale-105 transition-transform duration-500"
-            />
-          </div>
-          }
-        </div>
-      </section>
-      }
-
-      <!-- Lightbox Overlay -->
-      @if (selectedImageIndex > -1 && project && project.gallery) {
-      <div
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm transition-all duration-300"
-        (click)="closeLightbox()"
-      >
-        <!-- Close Button -->
-        <button
-          (click)="closeLightbox()"
-          class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors p-2 z-50"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </svg>
-        </button>
-
-        <!-- Previous Button -->
-        <button
-          (click)="prevImage($event)"
-          class="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors p-2 z-50 hover:bg-white/10 rounded-full"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="40"
-            height="40"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="m15 18-6-6 6-6" />
-          </svg>
-        </button>
-
-        <!-- Image Container -->
-        <div
-          class="relative max-w-7xl max-h-screen w-full h-full flex items-center justify-center"
-          (click)="$event.stopPropagation()"
-        >
-          <img
-            [src]="project.gallery[selectedImageIndex]"
-            [alt]="project.title"
-            class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
-          />
-
-          <!-- Counter -->
-          <div class="absolute bottom-[-3rem] left-1/2 -translate-x-1/2 text-white/80 font-medium">
-            {{ selectedImageIndex + 1 }} / {{ project.gallery.length }}
-          </div>
-        </div>
-
-        <!-- Next Button -->
-        <button
-          (click)="nextImage($event)"
-          class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors p-2 z-50 hover:bg-white/10 rounded-full"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="40"
-            height="40"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-        </button>
-      </div>
-      }
-
-      <!-- Videos -->
-      @if (safeVideoUrls.length > 0) {
-      <section>
-        <h2 class="text-2xl font-bold text-ink mb-6 flex items-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            class="text-red-500"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="m22 8-6 4 6 4V8Z" />
-            <rect width="14" height="12" x="2" y="6" rx="2" ry="2" />
-          </svg>
-          Videos
-        </h2>
-        <div class="grid grid-cols-1 gap-8">
-          @for (videoUrl of safeVideoUrls; track $index) {
-          <div
-            class="relative aspect-video rounded-xl overflow-hidden bg-card border border-line"
-          >
-            <iframe
-              [src]="videoUrl"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-              class="absolute top-0 left-0 w-full h-full"
-            >
-            </iframe>
-          </div>
-          }
-        </div>
-      </section>
-      }
     </div>
-    }
+
+    <button
+      type="button"
+      (click)="nextImage($event)"
+      aria-label="Imagen siguiente"
+      class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors p-2 z-50 hover:bg-white/10 rounded-full"
+    >
+      <svg
+        width="40"
+        height="40"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="m9 18 6-6-6-6" />
+      </svg>
+    </button>
   </div>
-</div>
+  }
+</article>
+}
