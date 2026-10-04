@@ -82,6 +82,49 @@ export const PROJECTS_DATA: Project[] = [
     ],
   },
   {
+    id: 'salda',
+    title: 'Saldá',
+    description:
+      'Aplicación web para controlar deudas personales: registra pagos y gastos, calcula cuánto se va en intereses y proyecta un plan con la fecha exacta en que terminas de pagar.',
+    fullDescription: `
+        Saldá reemplaza la hoja de Excel con la que se llevan tarjetas y préstamos. Cada pago se registra
+        en segundos desde el celular y la app calcula la deuda real del mes: el saldo del estado de
+        cuenta más las compras en cuotas que el banco todavía no cobra. También avisa cuando una compra
+        con tarjeta agrega deuda nueva y cuánto costará al mes con la tasa de esa tarjeta.
+
+        El núcleo es un motor financiero propio en TypeScript puro, con aritmética decimal y cubierto por
+        pruebas. Proyecta planes mes a mes con estrategias avalancha, bola de nieve o cuotas fijas,
+        incluye préstamos de interés fijo con pago único al vencimiento y simula consolidaciones,
+        obteniendo la tasa implícita de una oferta por bisección. Cada mes compara lo real contra la meta
+        del plan, y un simulador muestra el efecto de un abono extra antes de decidir.
+
+        Los datos viven en Supabase (PostgreSQL) con seguridad a nivel de fila: cada usuario solo ve sus
+        registros. Un trigger mantiene los saldos mensuales al día con cada pago, y la importación corre en
+        una sola transacción. Permite importar el Excel original con vista previa, validación y detección de
+        duplicados, y exportar a Excel, CSV o un respaldo JSON que, al restaurarse, verifica que los totales
+        de cada mes coincidan.
+
+        Es una PWA instalable con modo oscuro e inicio de sesión con Google One Tap. Soporta varias
+        monedas con el formato de cada país. Las páginas públicas se prerenderizan como HTML estático y
+        obtienen 100 en las cuatro categorías de Lighthouse.
+      `,
+    technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Supabase', 'PostgreSQL', 'TanStack Query', 'Zod', 'Recharts', 'PWA', 'Vitest', 'Vercel'],
+    demoUrl: 'https://salda-app.vercel.app/',
+    githubUrl: 'https://github.com/Estuardo-Sazo/salda-app',
+    status: 'production',
+    featured: true,
+    gallery: [
+      '/images/salda/image1.png',
+      '/images/salda/image2.png',
+      '/images/salda/image3.png',
+      '/images/salda/image4.png',
+      '/images/salda/image5.png',
+      '/images/salda/image6.png',
+      '/images/salda/image7.png',
+      '/images/salda/image8.png',
+    ],
+  },
+  {
     id: 'mi-flota-app',
     title: 'App web PWA Mi Flota',
     description:
